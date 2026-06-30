@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import portrait from "../assets/portrait.svg";
+import portrait from "../assets/portrait.jpg";
 ---
 
 <BaseLayout>
@@ -9,6 +9,7 @@ import portrait from "../assets/portrait.svg";
     <Image
       src={portrait}
       width={680}
+      densities={[2, 3]}
       alt="Portrait"
       loading="eager"
       style="margin-bottom: var(--space-3);"
