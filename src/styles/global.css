@@ -1,9 +1,18 @@
 :root {
   --border-radius: 4px;
-  --color-text: #333;
-  --color-primary: #7026b9;
+  --color-text: #11223a;
+  --color-muted: #5a6b80;
+  --color-bg: #f7fafd;
+  --color-primary: #00356b;
+  /* Solid Yale blue for now. To bring the gradient back, restore:
+     --color-accent: #1971c2;
+     --gradient: linear-gradient(95deg, #00356b, #1971c2 55%, #4dabf7); */
+  --color-accent: #00356b;
+  --gradient: linear-gradient(#00356b, #00356b);
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
   --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   --font-lg: 18px;
@@ -39,11 +48,124 @@ html {
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
   font-weight: normal;
   margin: 0;
   word-wrap: break-word;
+}
+
+/* Full-width sticky banner with a signature gradient top line.
+   The inner wrapper is capped at content width so it lines up with the
+   centered page content below. */
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  margin-bottom: var(--space-5);
+  transition: background 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Signature gradient top line — hidden at the top of the page, faded in once
+   the banner pops out. */
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Toggled on by a small scroll listener once the page is scrolled. */
+.banner.scrolled {
+  background: #fff;
+  border-bottom-color: rgba(17, 34, 58, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 53, 107, 0.06);
+  animation: bannerPop 0.28s ease;
+}
+
+.banner.scrolled::before {
+  opacity: 1;
+}
+
+@keyframes bannerPop {
+  from {
+    transform: translateY(-10px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner.scrolled {
+    animation: none;
+  }
+}
+
+.banner-inner {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  padding: var(--space-3) var(--size-gutter);
+}
+
+.banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.banner-top h1 {
+  margin: 0;
+}
+
+.banner .nav {
+  margin: var(--space-2) 0 0;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.socials a {
+  display: inline-flex;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.socials a:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.socials svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* Centered page content below the banner. */
+.container {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  padding: 0 var(--size-gutter) var(--size-gutter);
 }
 
 a {
@@ -53,35 +175,61 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 2px;
+  transition: color 0.15s ease;
 }
 
 a:active,
 a:hover {
   outline-width: 0;
+  color: var(--color-accent);
   text-decoration: underline;
 }
 
 h1 {
   margin: 0 0 1rem;
   padding: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4.5vw, 2.4rem);
+  font-weight: 700;
   line-height: var(--line-height-dense);
+  letter-spacing: -0.02em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
   letter-spacing: -0.01em;
+  border-left: 4px solid var(--color-accent);
+  padding-left: 0.6rem;
+  margin-top: var(--space-5);
 }
 
 .nav {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .nav a:link,
 .nav a:visited {
-  color: black;
+  color: var(--color-text);
   text-decoration: none;
+  background-image: var(--gradient);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.2s ease, color 0.15s ease;
+  padding-bottom: 2px;
 }
 
 .nav a:hover,
 .nav a:active {
-  color: black;
-  text-decoration: underline;
+  color: var(--color-primary);
+  background-size: 100% 2px;
 }
 
 img {
@@ -140,23 +288,31 @@ strong {
 
 .list-item {
   margin: 0;
+  padding-left: 0.4rem;
+  border-left: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.list-item:hover {
+  transform: translateX(3px);
+  border-color: var(--color-accent);
 }
 
 .list-item::marker {
-  color: #e95800;
+  color: #00356b;
+  font-size: 1.2em;
 }
 
-.list-item:nth-child(2)::marker {
-  color: #159bf3;
+/* Multi-blue marker cycle — re-enable for a livelier list:
+.list-item:nth-child(4n + 2)::marker {
+  color: #1971c2;
 }
-
-.list-item:nth-child(3)::marker {
-  color: #8eb814;
+.list-item:nth-child(4n + 3)::marker {
+  color: #4dabf7;
 }
-
-.list-item:nth-child(4)::marker {
-  color: #663399;
-}
+.list-item:nth-child(4n)::marker {
+  color: #3b5bdb;
+} */
 
 .list-item-link {
   color: var(--color-primary);
@@ -176,7 +332,7 @@ strong {
   margin: var(--size-gap) 0;
   padding: 0;
   list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }
 
 .media-list li {
@@ -187,6 +343,9 @@ strong {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 53, 107, 0.15);
 }
 
 .video-frame iframe {
@@ -200,4 +359,30 @@ strong {
 .media-title {
   margin: var(--space-2) 0 0;
   font-size: var(--font-sm);
+  color: var(--color-muted);
+}
+
+/* Portrait on the About page */
+main img {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 53, 107, 0.18);
+}
+
+/* Footer */
+footer {
+  color: var(--color-muted);
+  border-top: 1px solid rgba(17, 34, 58, 0.12);
+  padding-top: var(--space-4);
+}
+
+/* Mobile: tighter gutters, smaller inter-item gap, single-column lists. */
+@media (max-width: 600px) {
+  :root {
+    --size-gutter: var(--space-3);
+    --size-gap: var(--space-5);
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
 }
