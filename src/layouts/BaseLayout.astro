@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+// TODO: replace with the real performer name / voice type.
+const SITE_TITLE = "Your Name | Voice Type";
+
+const {
+  title = SITE_TITLE,
+  description = "Portfolio and performance schedule.",
+} = Astro.props;
+
+// Nav links — internal pages plus external social placeholders.
+// TODO: swap the external URLs for your real profiles (or remove).
+const links = [
+  { text: "About", url: "/" },
+  { text: "Schedule", url: "/schedule" },
+  { text: "Media", url: "/media" },
+  { text: "Instagram", url: "https://instagram.com/", external: true },
+  { text: "YouTube", url: "https://youtube.com/", external: true },
+];
+
+const year = new Date().getFullYear();
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <div
+      style="margin: 0 auto; max-width: var(--size-content); padding: var(--size-gutter);"
+    >
+      <h1>{SITE_TITLE}</h1>
+      <nav class="nav">
+        {
+          links.map((link, i) => (
+            <>
+              <a href={link.url} rel={link.external ? "external" : undefined}>
+                {link.text}
+              </a>
+              {i !== links.length - 1 && <> · </>}
+            </>
+          ))
+        }
+      </nav>
+      <main>
+        <slot />
+      </main>
+      <footer style="margin-top: var(--space-5); font-size: var(--font-sm);">
+        <nav class="nav">
+          {
+            links.map((link, i) => (
+              <>
+                <a href={link.url} rel={link.external ? "external" : undefined}>
+                  {link.text}
+                </a>
+                {i !== links.length - 1 && <> · </>}
+              </>
+            ))
+          }
+        </nav>
+        <p>© {year} · {SITE_TITLE}</p>
+      </footer>
+    </div>
+  </body>
+</html>

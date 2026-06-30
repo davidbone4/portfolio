@@ -1,0 +1,46 @@
+[
+  {
+    "organization": "Sample Chamber Choir",
+    "timestamp": "2099-04-12T19:30:00-05:00",
+    "date": "Apr 12, 2099",
+    "time": "7:30 pm",
+    "title": "Bach: St. John Passion",
+    "url": "https://example.com/tickets",
+    "venue": "Symphony Hall",
+    "address": "100 Main St",
+    "city": "Springfield",
+    "state": "IL",
+    "map": "https://maps.google.com/?q=Symphony+Hall+Springfield"
+  },
+  {
+    "organization": "Festival Baroque Ensemble",
+    "timestamp": "2099-06-03T20:00:00-05:00",
+    "date": "Jun 3, 2099",
+    "time": "8:00 pm",
+    "title": "Handel: Messiah",
+    "venue": "Grace Cathedral",
+    "city": "Riverton"
+  },
+  {
+    "organization": "City Opera Workshop",
+    "timestamp": "2024-11-09T19:00:00-06:00",
+    "date": "Nov 9, 2024",
+    "time": "7:00 pm",
+    "title": "Mozart: Le nozze di Figaro (Count)",
+    "url": "https://example.com/past-event",
+    "venue": "Community Theater",
+    "address": "42 Center Ave",
+    "city": "Lakeside",
+    "state": "MN",
+    "map": "https://maps.google.com/?q=Community+Theater+Lakeside"
+  },
+  {
+    "organization": "Early Music Society",
+    "timestamp": "2023-03-18T15:00:00-05:00",
+    "date": "Mar 18, 2023",
+    "time": "3:00 pm",
+    "title": "Schütz: Musikalische Exequien",
+    "venue": "St. Mark's Church",
+    "city": "Hillcrest"
+  }
+]

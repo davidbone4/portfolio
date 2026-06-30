@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import portrait from "../assets/portrait.svg";
+---
+
+<BaseLayout>
+  <div>
+    <Image
+      src={portrait}
+      width={680}
+      alt="Portrait"
+      loading="eager"
+      style="margin-bottom: var(--space-3);"
+    />
+    <h2>About</h2>
+    <!-- TODO: replace with your own bio. -->
+    <p>
+      Placeholder bio. Introduce yourself in a sentence or two — your voice
+      type, the repertoire you love, and a standout credit or quote. Keep it
+      warm and specific.
+    </p>
+    <p>
+      Placeholder second paragraph. List the ensembles, orchestras, and venues
+      you have performed with, plus any recordings, so visitors get a quick
+      sense of your range and experience.
+    </p>
+  </div>
+</BaseLayout>

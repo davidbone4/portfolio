@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ScheduleItem, { type Concert } from "../components/ScheduleItem.astro";
+import scheduleData from "../data/schedule.json";
+
+// Split into upcoming vs past at build time, then sort
+// (upcoming ascending, past most-recent first).
+const now = new Date();
+const events = scheduleData as Concert[];
+
+const upcoming = events
+  .filter((e) => new Date(e.timestamp) > now)
+  .sort((a, b) => +new Date(a.timestamp) - +new Date(b.timestamp));
+
+const past = events
+  .filter((e) => new Date(e.timestamp) <= now)
+  .sort((a, b) => +new Date(b.timestamp) - +new Date(a.timestamp));
+---
+
+<BaseLayout title="Schedule" description="Upcoming and past performances.">
+  <h2>Schedule</h2>
+  {
+    upcoming.length === 0 ? (
+      <p>No upcoming performances scheduled. Check back soon.</p>
+    ) : (
+      <ul class="list">
+        {upcoming.map((e) => <ScheduleItem event={e} />)}
+      </ul>
+    )
+  }
+
+  <h2>Past Concerts</h2>
+  <ul class="list">
+    {past.map((e) => <ScheduleItem event={e} />)}
+  </ul>
+</BaseLayout>

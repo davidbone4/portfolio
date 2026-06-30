@@ -1,0 +1,53 @@
+---
+export interface Concert {
+  organization?: string;
+  timestamp: string;
+  date?: string;
+  time?: string;
+  title?: string;
+  url?: string;
+  venue?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  map?: string;
+}
+
+const { event } = Astro.props as { event: Concert };
+
+// Join the parts of a location line, skipping anything missing — so we never
+// emit stray commas or "undefined" the way the original Gatsby template did.
+const location = [event.address, event.city, event.state]
+  .filter(Boolean)
+  .join(", ");
+---
+
+<li class="list-item">
+  {
+    event.url ? (
+      <a class="list-item-link" href={event.url} rel="external">
+        {event.date} ↗
+      </a>
+    ) : (
+      <span class="list-item-link">{event.date}</span>
+    )
+  }
+  <p class="list-item-description">
+    {event.organization && <>{event.organization}<br /></>}
+    {event.title && <>{event.title}<br /></>}
+    {event.venue && <>{event.venue}<br /></>}
+    {
+      location &&
+        (event.map ? (
+          <>
+            <a href={event.map} rel="external">{location} ↗</a>
+            <br />
+          </>
+        ) : (
+          <>{location}<br /></>
+        ))
+    }
+    {event.time}
+  </p>
+</li>
