@@ -1,17 +1,22 @@
 [
   {
     "type": "youtube",
-    "id": "dQw4w9WgXcQ",
-    "title": "Recital highlight — placeholder video"
+    "id": "9vJKHyAlMUw",
+    "title": "Envoi des fleurs by Charles Gounod"
   },
   {
     "type": "youtube",
-    "id": "aqz-KE-bpKQ",
-    "title": "Oratorio aria — placeholder video"
+    "id": "SrX1Fh8AekE",
+    "title": "À Vucchella by Paolo Tosti"
   },
   {
-    "type": "soundcloud",
-    "url": "https://soundcloud.com/forss/flickermood",
-    "title": "Studio recording — placeholder track"
+    "type": "youtube",
+    "id": "v4a7KUAI4L8",
+    "title": "Choral Demo - Ave Maria by Kevin Memley"
+  },
+  {
+    "type": "youtube",
+    "id": "RzS7ok2qZSY",
+    "title": "Choral Demo - Alleluia by Eric Whitacre"
   }
 ]

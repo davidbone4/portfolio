@@ -1,46 +1,145 @@
 [
   {
-    "organization": "Sample Chamber Choir",
-    "timestamp": "2099-04-12T19:30:00-05:00",
-    "date": "Apr 12, 2099",
-    "time": "7:30 pm",
-    "title": "Bach: St. John Passion",
-    "url": "https://example.com/tickets",
-    "venue": "Symphony Hall",
-    "address": "100 Main St",
-    "city": "Springfield",
-    "state": "IL",
-    "map": "https://maps.google.com/?q=Symphony+Hall+Springfield"
+    "organization": "Verdigris Ensemble",
+    "title": "Betty's Notebook",
+    "venue": "Eisemann Center",
+    "address": "2351 Performance Drive",
+    "map": "https://www.eisemanncenter.com",
+    "city": "Richardson",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2025-09-18T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-19T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-20T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-21T19:30:00-05:00"
+      },
+       {
+        "timestamp": "2025-09-25T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-26T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-27T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2025-09-28T19:30:00-05:00"
+      }
+    ]
   },
   {
-    "organization": "Festival Baroque Ensemble",
-    "timestamp": "2099-06-03T20:00:00-05:00",
-    "date": "Jun 3, 2099",
-    "time": "8:00 pm",
-    "title": "Handel: Messiah",
-    "venue": "Grace Cathedral",
-    "city": "Riverton"
+    "organization": "Verdigris Ensemble",
+    "title": "Travel Guide to Nicaragua",
+    "venue": "Dallas Holocaust and Human Rights Museum",
+    "address": "2403 Flora Street",
+    "map": "https://www.dhhrm.org",
+    "city": "Dallas",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2024-09-13T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-09-14T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-09-15T19:30:00-05:00"
+      }
+    ]
   },
   {
-    "organization": "City Opera Workshop",
-    "timestamp": "2024-11-09T19:00:00-06:00",
-    "date": "Nov 9, 2024",
-    "time": "7:00 pm",
-    "title": "Mozart: Le nozze di Figaro (Count)",
-    "url": "https://example.com/past-event",
-    "venue": "Community Theater",
-    "address": "42 Center Ave",
-    "city": "Lakeside",
-    "state": "MN",
-    "map": "https://maps.google.com/?q=Community+Theater+Lakeside"
+    "organization": "Verdigris Ensemble",
+    "title": "Reflections",
+    "venue": "Hamon Hall in the Winspear Opera House",
+    "address": "2403 Flora Street",
+    "map": "https://attpac.org/visit/venues/hamon-hall",
+    "city": "Dallas",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2024-09-13T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-09-14T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-09-15T19:30:00-05:00"
+      }
+    ]
   },
   {
-    "organization": "Early Music Society",
-    "timestamp": "2023-03-18T15:00:00-05:00",
-    "date": "Mar 18, 2023",
-    "time": "3:00 pm",
-    "title": "Schütz: Musikalische Exequien",
-    "venue": "St. Mark's Church",
-    "city": "Hillcrest"
+    "organization": "Verdigris Ensemble",
+    "title": "Mis-Lead",
+    "venue": "Kalita Humphreys Theater",
+    "address": "3636 Turtle Creek Blvd",
+    "map": "https://attpac.org/visit/venues/kalita-humphreys-theater",
+    "city": "Dallas",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2024-04-05T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-04-06T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-04-07T19:30:00-05:00"
+      }
+    ]
+  },
+  {
+    "organization": "Verdigris Ensemble",
+    "title": "Dust Bowl",
+    "venue": "Wyly Theatre",
+    "address": "2400 Flora St",
+    "map": "https://attpac.org/visit/venues/wyly-theatre",
+    "city": "Dallas",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2024-02-23T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-02-24T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2024-02-24T14:00:00-05:00"
+      },
+      {
+        "timestamp": "2024-02-25T19:30:00-05:00"
+      }
+    ]
+  },
+  {
+    "organization": "Verdigris Ensemble",
+    "title": "The Endangered",
+    "venue": "Dallas Contemporary",
+    "map": "https://www.dallascontemporary.org",
+    "city": "Dallas",
+    "state": "TX",
+    "url": "https://www.verdigrismusic.org/past-works",
+    "days": [
+      {
+        "timestamp": "2023-08-04T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2023-08-05T19:30:00-05:00"
+      },
+      {
+        "timestamp": "2023-08-06T19:30:00-05:00"
+      }
+    ]
   }
 ]

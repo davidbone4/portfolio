@@ -2,8 +2,6 @@
 export interface Concert {
   organization?: string;
   timestamp: string;
-  date?: string;
-  time?: string;
   title?: string;
   url?: string;
   venue?: string;
@@ -14,10 +12,57 @@ export interface Concert {
   map?: string;
 }
 
+export interface ConcertDay {
+  timestamp: string;
+  title?: string;
+}
+
+export interface ScheduleEntry extends Omit<Concert, "timestamp"> {
+  timestamp?: string;
+  days?: ConcertDay[];
+}
+
 const { event } = Astro.props as { event: Concert };
 
-// Join the parts of a location line, skipping anything missing — so we never
-// emit stray commas or "undefined" the way the original Gatsby template did.
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+// Read the wall-clock components straight out of the ISO timestamp string, so
+// the venue-local time is shown verbatim regardless of the build machine's
+// timezone (a `new Date(...)` would shift it to the host offset).
+function timestampParts(timestamp: string) {
+  const m = timestamp.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+  if (!m) return null;
+  const [, year, month, day, hour, minute] = m;
+  return {
+    year: Number(year),
+    month: Number(month),
+    day: Number(day),
+    hour: Number(hour),
+    minute: Number(minute),
+  };
+}
+
+// "March 18, 2023"
+function formatDate(timestamp: string) {
+  const p = timestampParts(timestamp);
+  return p ? `${MONTHS[p.month - 1]} ${p.day}, ${p.year}` : "";
+}
+
+// "3:00 pm"
+function formatTime(timestamp: string) {
+  const p = timestampParts(timestamp);
+  if (!p) return "";
+  const period = p.hour >= 12 ? "pm" : "am";
+  const hour = p.hour % 12 || 12;
+  return `${hour}:${String(p.minute).padStart(2, "0")} ${period}`;
+}
+
+const displayDate = formatDate(event.timestamp);
+const displayTime = formatTime(event.timestamp);
+
 const location = [event.address, event.city, event.state]
   .filter(Boolean)
   .join(", ");
@@ -27,27 +72,27 @@ const location = [event.address, event.city, event.state]
   {
     event.url ? (
       <a class="list-item-link" href={event.url} rel="external">
-        {event.date} ↗
+        {displayDate} ↗
       </a>
     ) : (
-      <span class="list-item-link">{event.date}</span>
+      <span class="list-item-link">{displayDate}</span>
     )
   }
   <p class="list-item-description">
     {event.organization && <>{event.organization}<br /></>}
     {event.title && <>{event.title}<br /></>}
-    {event.venue && <>{event.venue}<br /></>}
     {
-      location &&
+      event.venue &&
         (event.map ? (
           <>
-            <a href={event.map} rel="external">{location} ↗</a>
+            <a href={event.map} rel="external">{event.venue} ↗</a>
             <br />
           </>
         ) : (
-          <>{location}<br /></>
+          <>{event.venue}<br /></>
         ))
     }
-    {event.time}
+    {location && <>{location}<br /></>}
+    {displayTime}
   </p>
 </li>

@@ -41,3 +41,9 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+## Features to add
+
+- filter and search for the upcoming events page
+- cv viewer in a new page

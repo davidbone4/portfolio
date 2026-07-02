@@ -1,12 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ScheduleItem, { type Concert } from "../components/ScheduleItem.astro";
+import ScheduleItem, {
+  type Concert,
+  type ScheduleEntry,
+} from "../components/ScheduleItem.astro";
 import scheduleData from "../data/schedule.json";
 
 // Split into upcoming vs past at build time, then sort
 // (upcoming ascending, past most-recent first).
 const now = new Date();
-const events = scheduleData as Concert[];
+
+// Flatten multi-day entries into one resolved item per day. Per-day fields
+// (timestamp/date/time/title) override the shared entry fields, so each day
+// sorts into the schedule on its own date like any single event.
+const entries = scheduleData as ScheduleEntry[];
+const events: Concert[] = entries.flatMap((entry) =>
+  entry.days?.length
+    ? entry.days.map((day) => ({ ...entry, ...day, days: undefined }))
+    : [entry as Concert],
+);
 
 const upcoming = events
   .filter((e) => new Date(e.timestamp) > now)
