@@ -4,12 +4,26 @@ import mediaData from "../data/media.json";
 
 interface MediaItem {
   type: "youtube" | "soundcloud";
+  category: string;
   id?: string;
   url?: string;
   title?: string;
 }
 
 const items = mediaData as MediaItem[];
+
+const CATEGORY_ORDER = ["Solo", "Choral"];
+
+const categories = [
+  ...new Set([...CATEGORY_ORDER, ...items.map((item) => item.category)]),
+];
+
+const groups = categories
+  .map((category) => ({
+    category,
+    items: items.filter((item) => item.category === category),
+  }))
+  .filter((group) => group.items.length > 0);
 
 const soundcloudEmbed = (url: string) =>
   `https://w.soundcloud.com/player/?url=${encodeURIComponent(
@@ -18,35 +32,39 @@ const soundcloudEmbed = (url: string) =>
 ---
 
 <BaseLayout title="Media" description="Video and audio recordings.">
-  <h2>Media</h2>
-  <ul class="media-list">
-    {
-      items.map((item) => (
-        <li>
-          {item.type === "youtube" && item.id && (
-            <div class="video-frame">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${item.id}`}
-                title={item.title}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              />
-            </div>
-          )}
-          {item.type === "soundcloud" && item.url && (
-            <iframe
-              width="100%"
-              height="120"
-              loading="lazy"
-              title={item.title}
-              src={soundcloudEmbed(item.url)}
-              style="border: 0;"
-            />
-          )}
-          {item.title && <p class="media-title">{item.title}</p>}
-        </li>
-      ))
-    }
-  </ul>
+  {
+    groups.map((group) => (
+      <section>
+        <h2>{group.category}</h2>
+        <ul class="media-list">
+          {group.items.map((item) => (
+            <li>
+              {item.type === "youtube" && item.id && (
+                <div class="video-frame">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${item.id}`}
+                    title={item.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  />
+                </div>
+              )}
+              {item.type === "soundcloud" && item.url && (
+                <iframe
+                  width="100%"
+                  height="120"
+                  loading="lazy"
+                  title={item.title}
+                  src={soundcloudEmbed(item.url)}
+                  style="border: 0;"
+                />
+              )}
+              {item.title && <p class="media-title">{item.title}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
 </BaseLayout>
