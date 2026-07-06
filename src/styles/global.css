@@ -1,0 +1,445 @@
+:root {
+  --border-radius: 4px;
+  --color-text: #11223a;
+  --color-muted: #5a6b80;
+  --color-bg: #f7fafd;
+  --color-primary: #00356b;
+  /* Solid Yale blue for now. To bring the gradient back, restore:
+     --color-accent: #1971c2;
+     --gradient: linear-gradient(95deg, #00356b, #1971c2 55%, #4dabf7); */
+  --color-accent: #00356b;
+  --gradient: linear-gradient(#00356b, #00356b);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-lg: 18px;
+  --font-md: 16px;
+  --font-sm: 14px;
+  --font-sx: 12px;
+  --line-height-loose: 1.75;
+  --line-height-normal: 1.5;
+  --line-height-dense: 1.1;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 64px;
+  --size-content: 54rem;
+  --size-gutter: var(--space-5);
+  --size-gap: var(--space-6);
+  --title-size: clamp(1.4rem, 4.5vw, 2.4rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-size: var(--font-md);
+  line-height: var(--line-height-normal);
+  overflow-y: scroll;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: normal;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Full-width sticky banner with a signature gradient top line.
+   The inner wrapper is capped at content width so it lines up with the
+   centered page content below. */
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  margin-bottom: var(--space-5);
+  transition: background 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Signature gradient top line — hidden at the top of the page, faded in once
+   the banner pops out. */
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Toggled on by a small scroll listener once the page is scrolled. */
+.banner.scrolled {
+  background: #fff;
+  border-bottom-color: rgba(17, 34, 58, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 53, 107, 0.06);
+  animation: bannerPop 0.28s ease;
+}
+
+.banner.scrolled::before {
+  opacity: 1;
+}
+
+@keyframes bannerPop {
+  from {
+    transform: translateY(-10px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner.scrolled {
+    animation: none;
+  }
+}
+
+.banner-inner {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  padding: var(--space-3) var(--size-gutter);
+}
+
+.banner-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.banner-top h1 {
+  margin: 0;
+}
+
+.banner .nav {
+  margin: var(--space-2) 0 0;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.socials a {
+  display: inline-flex;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.socials a:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.socials svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* Centered page content below the banner. */
+.container {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  padding: 0 var(--size-gutter) var(--size-gutter);
+}
+
+a {
+  background-color: transparent;
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: var(--line-height-dense);
+  letter-spacing: -0.02em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-left: 4px solid var(--color-accent);
+  padding-left: 0.6rem;
+  margin-top: var(--space-5);
+}
+
+.nav {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.nav a:link,
+.nav a:visited {
+  color: var(--color-text);
+  text-decoration: none;
+  background-image: var(--gradient);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.2s ease, color 0.15s ease;
+  padding-bottom: 2px;
+}
+
+.nav a:hover,
+.nav a:active {
+  color: var(--color-primary);
+  background-size: 100% 2px;
+}
+
+img {
+  border-style: none;
+  max-width: 100%;
+  height: auto;
+}
+
+hgroup,
+img,
+figure,
+fieldset,
+ul,
+ol,
+dl,
+dd,
+p {
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+
+ul,
+ol {
+  margin-left: var(--space-4);
+  list-style-position: outside;
+  list-style-image: none;
+}
+
+li {
+  margin-bottom: calc(var(--space-4) / 2);
+  padding-left: 0;
+}
+
+p {
+  max-width: 680px;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/* Schedule list — responsive auto-fit grid with cycling colored marker bullets.
+   Ported from the Gatsby site's index.module.css. */
+.list {
+  display: grid;
+  margin: var(--size-gap) 0;
+  /* https://css-tricks.com/responsive-layouts-fewer-media-queries/ */
+  --w: 280px;
+  --n: 2;
+  gap: var(--size-gap);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(var(--w), 100% / (var(--n) + 1) + 0.1%), 1fr)
+  );
+}
+
+.list-item {
+  margin: 0;
+  padding-left: 0.4rem;
+  border-left: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.list-item:hover {
+  transform: translateX(3px);
+  border-color: var(--color-accent);
+}
+
+.list-item::marker {
+  color: #00356b;
+  font-size: 1.2em;
+}
+
+/* Multi-blue marker cycle — re-enable for a livelier list:
+.list-item:nth-child(4n + 2)::marker {
+  color: #1971c2;
+}
+.list-item:nth-child(4n + 3)::marker {
+  color: #4dabf7;
+}
+.list-item:nth-child(4n)::marker {
+  color: #3b5bdb;
+} */
+
+.list-item-link {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.list-item-description {
+  color: var(--color-text);
+  margin-top: var(--space-1);
+  margin-bottom: 0;
+}
+
+/* Media page — responsive video embeds */
+.media-list {
+  display: grid;
+  gap: var(--size-gap);
+  margin: var(--size-gap) 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+
+.media-list li {
+  margin: 0;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 53, 107, 0.15);
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.media-title {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-sm);
+  color: var(--color-muted);
+}
+
+/* Native, dependency-free PDF embed for the Choral CV page. */
+.cv-heading {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
+.cv-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.cv-heading a:hover,
+.cv-heading a:active {
+  color: var(--color-primary);
+}
+
+.cv-newtab-icon {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cv-heading a:hover .cv-newtab-icon,
+.cv-heading a:active .cv-newtab-icon {
+  color: var(--color-primary);
+  transform: translate(1px, -1px);
+}
+
+.pdf-frame {
+  width: 100%;
+  height: min(85vh, 1100px);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 53, 107, 0.15);
+  background: #fff;
+}
+
+.pdf-frame object,
+.pdf-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Portrait on the About page */
+main img {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 53, 107, 0.18);
+}
+
+/* Footer */
+footer {
+  color: var(--color-muted);
+  border-top: 1px solid rgba(17, 34, 58, 0.12);
+  padding-top: var(--space-4);
+}
+
+footer .socials {
+  margin-bottom: var(--space-3);
+}
+
+/* Mobile: tighter gutters, smaller inter-item gap, single-column lists. */
+@media (max-width: 600px) {
+  :root {
+    --size-gutter: var(--space-3);
+    --size-gap: var(--space-5);
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pdf = "/choral-cv.pdf";
+---
+
+<BaseLayout title="Choral CV" description="Choral curriculum vitae.">
+  <section>
+    <h2 class="cv-heading">
+      <a href={pdf} target="_blank" rel="noopener">
+        Choral CV
+        <svg
+          class="cv-newtab-icon"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M14 4h6v6" />
+          <path d="M20 4 10 14" />
+          <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+        </svg>
+      </a>
+    </h2>
+    <div class="pdf-frame">
+      <object data={pdf} type="application/pdf">
+        <iframe src={pdf} title="Choral CV"></iframe>
+      </object>
+    </div>
+  </section>
+</BaseLayout>

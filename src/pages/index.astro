@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import portrait from "../assets/portrait.jpg";
+---
+
+<BaseLayout>
+  <div>
+    <Image
+      src={portrait}
+      width={680}
+      densities={[2, 3]}
+      alt="Portrait"
+      loading="eager"
+      style="margin-bottom: var(--space-3);"
+    />
+    <h2>About</h2>
+    <p>
+      David Norman Bone is a tenor based in New Haven, Connecticut. He is currently pursuing
+      a Master of Music Degree in Vocal Performance at the Yale Institue of Sacred Music and Yale School of Music, 
+      where he studies with Professor James Taylor, and sings in the Yale Voxtet and the Yale Schola Cantorum. 
+    </p>
+    <p>
+      Prior to Yale, David lived in Dallas, Texas, where he sang professionally with many ensembles around DFW, including
+      the Dallas Bach Society, Verdigris Ensemble, and the Compline Choir at Saint Michael and All Angels Episcopal Church.
+      He served as Staff Singer at Saint Michael and All Angels and The Church of the Incarnation. He holds a Bachelor
+      of Arts in Music Degree from Iowa State University, where he studied with Professor Chad Sonka and sang in the Iowa State Singers.
+    </p>
+    <p>
+      Outside of music, David enjoys reading, walking, and spending time with his family and friends. He also enjoys enjoys gaming and technology,
+      and has 5 years of experience working as a Software Engineer at Goldman Sachs and John Deere.
+      He holds a Bachelor of Science Degree in Software Engineering from Iowa State University.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,98 @@
+---
+import "../styles/global.css";
+import Socials from "../components/Socials.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const SITE_TITLE = "David Norman Bone";
+const SUBTITLE = "Tenor";
+
+const {
+  title = SITE_TITLE,
+  description = "Portfolio and performance schedule.",
+} = Astro.props;
+
+// Internal page nav (left side of the banner).
+const links = [
+  { text: "About", url: "/" },
+  { text: "Schedule", url: "/schedule" },
+  { text: "Media", url: "/media" },
+  { text: "Choral CV", url: "/cv" },
+];
+
+const year = new Date().getFullYear();
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <header class="banner">
+      <div class="banner-inner">
+        <div class="banner-top">
+          <h1>{SITE_TITLE}, {SUBTITLE}</h1>
+        </div>
+        <nav class="nav">
+          {
+            links.map((link, i) => (
+              <>
+                <a href={link.url}>{link.text}</a>
+                {i !== links.length - 1 && <> · </>}
+              </>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <main>
+        <slot />
+      </main>
+      <footer>
+        <Socials />
+        <nav class="nav">
+          {
+            links.map((link, i) => (
+              <>
+                <a href={link.url}>{link.text}</a>
+                {i !== links.length - 1 && <> · </>}
+              </>
+            ))
+          }
+        </nav>
+        <p>© {year} · {SITE_TITLE}</p>
+      </footer>
+    </div>
+
+    <script is:inline>
+      const banner = document.querySelector(".banner");
+      const onScroll = () =>
+        banner.classList.toggle("scrolled", window.scrollY > 8);
+      onScroll();
+      addEventListener("scroll", onScroll, { passive: true });
+    </script>
+  </body>
+</html>

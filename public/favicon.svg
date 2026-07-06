@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <text x="64" y="64" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="72">DB</text>
+    <style>
+        text { fill: #000; }
+        @media (prefers-color-scheme: dark) {
+            text { fill: #FFF; }
+        }
+    </style>
+</svg>
