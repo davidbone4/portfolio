@@ -47,3 +47,4 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 - filter and search for the upcoming events page
 - cv viewer in a new page
+- add a type field to media and have sections

@@ -6,13 +6,8 @@ import ScheduleItem, {
 } from "../components/ScheduleItem.astro";
 import scheduleData from "../data/schedule.json";
 
-// Split into upcoming vs past at build time, then sort
-// (upcoming ascending, past most-recent first).
 const now = new Date();
 
-// Flatten multi-day entries into one resolved item per day. Per-day fields
-// (timestamp/date/time/title) override the shared entry fields, so each day
-// sorts into the schedule on its own date like any single event.
 const entries = scheduleData as ScheduleEntry[];
 const events: Concert[] = entries.flatMap((entry) =>
   entry.days?.length
@@ -30,7 +25,7 @@ const past = events
 ---
 
 <BaseLayout title="Schedule" description="Upcoming and past performances.">
-  <h2>Schedule</h2>
+  <h2>Upcoming</h2>
   {
     upcoming.length === 0 ? (
       <p>No upcoming performances scheduled. Check back soon.</p>
