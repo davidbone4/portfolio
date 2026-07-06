@@ -365,8 +365,38 @@ strong {
 }
 
 /* Native, dependency-free PDF embed for the Choral CV page. */
-.cv-actions {
-  margin: 0 0 var(--space-3);
+.cv-heading {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
+.cv-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.cv-heading a:hover,
+.cv-heading a:active {
+  color: var(--color-primary);
+}
+
+.cv-newtab-icon {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cv-heading a:hover .cv-newtab-icon,
+.cv-heading a:active .cv-newtab-icon {
+  color: var(--color-primary);
+  transform: translate(1px, -1px);
 }
 
 .pdf-frame {
