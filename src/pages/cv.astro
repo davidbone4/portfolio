@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pdf = "/choral-cv.pdf";
+---
+
+<BaseLayout title="Choral CV" description="Choral curriculum vitae.">
+  <section>
+    <div class="pdf-frame">
+      <object data={pdf} type="application/pdf">
+        <iframe src={pdf} title="Choral CV"></iframe>
+      </object>
+    </div>
+  </section>
+</BaseLayout>
